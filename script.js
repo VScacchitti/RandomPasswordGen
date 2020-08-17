@@ -84,12 +84,28 @@ var confirmLowCase;
 
 function generatePassword() {
   var confirmLength = prompt("Please enter desired password length?");
-  //Loop for
+  //Loop for confirming password length
   while (confirmLength <= 8 || confirmLength >= 128) {
     alert("Password length must be between 8-128 characters");
 
     var confirmLength = prompt("Please enter desired password length?");
   }
+
+  alert(`Your password will have ${confirmLength} characters`);
+  //Confirm  password criteria
+  var confirmSpecialChar = confirm(
+    "Click OK to confirm you would like to use special characters in your password!"
+  );
+  var confirmNumChar = confirm(
+    "Click OK to confirm you would like to use numberic characters in your password!"
+  );
+  var confirmUpCase = confirm(
+    "Click OK to confirm you would like to use uppercse characters in your password"
+  );
+
+  var confirmLowCase = confirm(
+    "Click OK to confirm you would like to use lowercase characters."
+  );
 }
 
 // Write password to the #password input
