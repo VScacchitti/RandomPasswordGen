@@ -93,18 +93,40 @@ function generatePassword() {
   confirmLength = prompt(
     "How many characters would you like the password to have? Please choose between 8-128."
   );
-
+  //While Loop for password length
   while (confirmLength <= 7 || confirmLength >= 51) {
     alert("Password length must be between 8-50 characters Try again");
     confirmLength = prompt(
       "How many characters would you like your password to contain?"
     );
   }
-
+  // Alert the user choice
   alert(`You have choosen ${confirmLength} characters for your password!`);
-
+  // confirm
   confirmNum = confirm("Will this password contain numbers?");
   confirmChar = confirm("Will this password contain special characters?");
   ConfirmLower = confirm("Will this password contain lowercase letters?");
   ConfirmUpper = confirm("will this password contain uppercase letters?");
+
+  if (!confirmNum && !confirmChar && !confirmLower && !confirmUpper) {
+    choices = "You must choose at least one criteria!";
+    //all 4  criteria are choosen
+  } else if (confirmNum && confirmChar && confirmLower && confirmUpper) {
+    //if 3 criteria are choosen
+  } else if (confirmNum && confirmChar && confirmLower) {
+  } else if (confirmNum && confirmChar && confirmUpper) {
+  } else if (confirmNum && confirmLower && confirmUpper) {
+    //if two criteria are choosen
+  } else if (confirmNum && confirmChar) {
+  } else if (conirmNum && confirmLower) {
+  } else if (confirmNum && confirmLower) {
+  } else if (confirmChar && confirmLower) {
+  } else if (confirmChar && confirmUpper) {
+  } else if (confirmLower && confirmUpper) {
+    //if one criteria is choosen
+  } else if (confirmNum) {
+  } else if (confirmChar) {
+  } else if (confirmLower) {
+  } else {
+  }
 }
