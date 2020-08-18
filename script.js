@@ -112,21 +112,35 @@ function generatePassword() {
     choices = "You must choose at least one criteria!";
     //all 4  criteria are choosen
   } else if (confirmNum && confirmChar && confirmLower && confirmUpper) {
+    choices = numberr.concat(character, alpha, alpha2);
     //if 3 criteria are choosen
   } else if (confirmNum && confirmChar && confirmLower) {
+    choices = number.concat(character, alpha2);
   } else if (confirmNum && confirmChar && confirmUpper) {
+    choices = number.concat(character, alpha2);
   } else if (confirmNum && confirmLower && confirmUpper) {
+    choices = number.concat(alpha, alpha2);
     //if two criteria are choosen
   } else if (confirmNum && confirmChar) {
+    choices = number.concat(character);
   } else if (conirmNum && confirmLower) {
-  } else if (confirmNum && confirmLower) {
+    choices = number.concat(alpha);
+  } else if (confirmNum && confirmUpper) {
+    choices = number.concat(alpha2);
   } else if (confirmChar && confirmLower) {
+    choices = character.concat(alpha);
   } else if (confirmChar && confirmUpper) {
+    choices = character.concat(alpha2);
   } else if (confirmLower && confirmUpper) {
+    choices = alpha.concat(alpha2);
     //if one criteria is choosen
   } else if (confirmNum) {
+    choices = number;
   } else if (confirmChar) {
+    choices = character;
   } else if (confirmLower) {
+    choices = alpha;
   } else {
+    choices = alpha2;
   }
 }
