@@ -1,23 +1,49 @@
 // Assignment Code
-var generateBtn = document.querySelector("#generate");
-// Various Character Arrays
-var number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-var specialChar = [
+// User Input Variables
+var confirmLength;
+var confirmNum;
+var confirmChar;
+var confirmUpper;
+var confirmLower;
+//Start Password with variable values.
+//Special Characters
+var character = [
   "!",
+  "#",
+  "$",
   "%",
   "&",
-  ",",
+  "'",
+  "(",
+  ")",
   "*",
   "+",
+  ",",
   "-",
   ".",
   "/",
-  "<",
-  ">",
-  "?",
+  ":",
+  ";",
+  " < ",
+  "=",
+  " > ",
+  " ? ",
+  "@",
+  "[",
+  "\\",
+  "]",
+  " ^ ",
+  "_",
+  "`",
+  "{",
+  "|",
+  "}",
   "~",
 ];
-var alphaLowCase = [
+// Numeric characters
+var number = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+// Alphabetical characters
+var alpha = [
   "a",
   "b",
   "c",
@@ -45,76 +71,40 @@ var alphaLowCase = [
   "y",
   "z",
 ];
-var alphaUpCase = [
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
-];
-// Variables
-var confirmPassLength = "";
-var confirmSpecialChar;
-var confirmNumChar;
-var confirmUpCase;
-var confirmLowCase;
+// Space is for the Uppercase conversion
+var space = [];
+//Choices declared now to be used later
+var choices;
+// creates varuable to uppercasw conversion
+var toUpper = function (x) {
+  return x.toUpperCase();
+};
+//Creates variable for uppercase converion.
+var alpha2 = alpha.map(toUpper);
 
-//Prompt to confirm the length of user password
+var get = document.querySelector("#generate");
 
+get.addEventListener("click", function () {
+  ps = generatePassword();
+  document.getElementById("password").placeholder = ps;
+});
+// starting the function
 function generatePassword() {
-  var confirmLength = prompt("Please enter desired password length?");
-  //Loop for confirming password length
-  while (confirmLength <= 8 || confirmLength >= 128) {
-    alert("Password length must be between 8-128 characters");
+  confirmLength = prompt(
+    "How many characters would you like the password to have? Please choose between 8-128."
+  );
 
-    var confirmLength = prompt("Please enter desired password length?");
+  while (confirmLength <= 7 || confirmLength >= 51) {
+    alert("Password length must be between 8-50 characters Try again");
+    confirmLength = prompt(
+      "How many characters would you like your password to contain?"
+    );
   }
 
-  alert(`Your password will have ${confirmLength} characters`);
-  //Confirm  password criteria
-  var confirmSpecialChar = confirm(
-    "Click OK to confirm you would like to use special characters in your password!"
-  );
-  var confirmNumChar = confirm(
-    "Click OK to confirm you would like to use numberic characters in your password!"
-  );
-  var confirmUpCase = confirm(
-    "Click OK to confirm you would like to use uppercse characters in your password"
-  );
+  alert(`You have choosen ${confirmLength} characters for your password!`);
 
-  var confirmLowCase = confirm(
-    "Click OK to confirm you would like to use lowercase characters."
-  );
+  confirmNum = confirm("Will this password contain numbers?");
+  confirmChar = confirm("Will this password contain special characters?");
+  ConfirmLower = confirm("Will this password contain lowercase letters?");
+  ConfirmUpper = confirm("will this password contain uppercase letters?");
 }
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-}
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
