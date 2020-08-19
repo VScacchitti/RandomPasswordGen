@@ -234,4 +234,21 @@ function generatePassword() {
   } else {
     userChoice = alphaUpper;
   }
+  // empty array for randomly selected password characters
+  var password = [];
+
+  // for loop
+  for (i = 0; i < confirmLength; i++) {
+    var pickUserChoice =
+      userChoice[Math.floor(Math.random() * userChoice.length)];
+    passsword.push(pickUserChoice);
+  }
+
+  var randompass = passsword.join("");
+  UserInput(randompass);
+  return randompass;
+}
+
+function UserInput(randompass) {
+  document.getElementById("#password").textContent = randompass;
 }
