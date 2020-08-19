@@ -1,12 +1,9 @@
-// Assignment Code
-// User Input Variables
 var confirmLength;
 var confirmNum;
 var confirmChar;
-var confirmUpper;
 var confirmLower;
-//Start Password with variable values.
-//Special Characters
+var confirmUpper;
+
 var character = [
   "!",
   "#",
@@ -30,7 +27,6 @@ var character = [
   " ? ",
   "@",
   "[",
-  "\\",
   "]",
   " ^ ",
   "_",
@@ -42,8 +38,8 @@ var character = [
 ];
 // Numeric characters
 var number = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-// Alphabetical characters
-var alpha = [
+// alphaLowbetical characters
+var alphaLow = [
   "a",
   "b",
   "c",
@@ -71,76 +67,171 @@ var alpha = [
   "y",
   "z",
 ];
-// Space is for the Uppercase conversion
-var space = [];
-//Choices declared now to be used later
-var choices;
-// creates varuable to uppercasw conversion
-var toUpper = function (x) {
-  return x.toUpperCase();
-};
-//Creates variable for uppercase converion.
-var alpha2 = alpha.map(toUpper);
 
-var get = document.querySelector("#generate");
+var alphaUpper = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
 
-get.addEventListener("click", function () {
-  ps = generatePassword();
-  document.getElementById("password").placeholder = ps;
+var userChoice;
+
+var generateBtn = document.querySelector("#generate");
+//On Click button function
+generateBtn.addEventListener("click", function () {
+  passsword = generatePassword();
+  document.getElementById("#passoword").placeholder = passsword;
 });
-// starting the function
+// generates random password using arrays
 function generatePassword() {
   confirmLength = prompt(
-    "How many characters would you like the password to have? Please choose between 8-128."
+    "How many characters would you like your password to be? Please choose between 8-128."
   );
-  //While Loop for password length
-  while (confirmLength <= 7 || confirmLength >= 51) {
-    alert("Password length must be between 8-50 characters Try again");
+  // while loop to conifrm length with-in given parameters
+  while (confirmLength <= 7 || confirmLength >= 129) {
+    alert(
+      "Password length must be between 8 and 128 characters. Please try again"
+    );
     confirmLength = prompt(
-      "How many characters would you like your password to contain?"
+      "How many characcters would you like your password to be? Please choose between 8-128"
     );
   }
-  // Alert the user choice
-  alert(`You have choosen ${confirmLength} characters for your password!`);
-  // confirm
-  confirmNum = confirm("Will this password contain numbers?");
+
+  alert(`You have choosen ${confirmLength} charaters for your password`);
+
+  confirmNum = confirm("Will this passsword contain numeric characters?");
   confirmChar = confirm("Will this password contain special characters?");
-  ConfirmLower = confirm("Will this password contain lowercase letters?");
-  ConfirmUpper = confirm("will this password contain uppercase letters?");
+  confirmLower = confirm("Will this password contain lowercase letters?");
+  confirmUpper = confirm("WIll this password contain uppercase letters?");
 
   if (!confirmNum && !confirmChar && !confirmLower && !confirmUpper) {
-    choices = "You must choose at least one criteria!";
-    //all 4  criteria are choosen
-  } else if (confirmNum && confirmChar && confirmLower && confirmUpper) {
-    choices = numberr.concat(character, alpha, alpha2);
-    //if 3 criteria are choosen
-  } else if (confirmNum && confirmChar && confirmLower) {
-    choices = number.concat(character, alpha2);
-  } else if (confirmNum && confirmChar && confirmUpper) {
-    choices = number.concat(character, alpha2);
-  } else if (confirmNum && confirmLower && confirmUpper) {
-    choices = number.concat(alpha, alpha2);
-    //if two criteria are choosen
-  } else if (confirmNum && confirmChar) {
-    choices = number.concat(character);
-  } else if (conirmNum && confirmLower) {
-    choices = number.concat(alpha);
-  } else if (confirmNum && confirmUpper) {
-    choices = number.concat(alpha2);
-  } else if (confirmChar && confirmLower) {
-    choices = character.concat(alpha);
-  } else if (confirmChar && confirmUpper) {
-    choices = character.concat(alpha2);
-  } else if (confirmLower && confirmUpper) {
-    choices = alpha.concat(alpha2);
-    //if one criteria is choosen
-  } else if (confirmNum) {
-    choices = number;
-  } else if (confirmChar) {
-    choices = character;
-  } else if (confirmLower) {
-    choices = alpha;
+    alert(
+      "You must choose atleast one criteria to continue. Please try again."
+    );
+    //all 4 criteria are choosen
+  } else if (
+    confirmNum === true &&
+    confirmChar === true &&
+    confirmLower === true &&
+    confirmUpper === true
+  ) {
+    userChoice = number.concat(character, alphaLow, alphaUpper);
+    //3 criteria are choosen
+  } else if (
+    confirmNum == true &&
+    confirmChar === true &&
+    confirmLower === true &&
+    !confirmUpper
+  ) {
+    userChoice = number.concat(character, alphaLow);
+  } else if (
+    (confirmNum =
+      true && confirmChar === true && confirmUpper === true && !confirmLower)
+  ) {
+    userChoice = number.concat(character, alphaUpper);
+  } else if (
+    confirmNum === true &&
+    confirmLower === true &&
+    confirmUpper === true &&
+    !confirmChar
+  ) {
+    userChoice = number.concat(alphaLow, alphaUpper);
+  } else if (
+    confirmChar === true &&
+    confirmLower === true &&
+    confirmUpper === true &&
+    !confirmNum
+  ) {
+    userChoice = character.concat(alphaLow, alphaUpper);
+    // 2 criteria are choosen
+  } else if (
+    confirmNum === true &&
+    confirmChar === true &&
+    !confirmLower &&
+    !confirmUpper
+  ) {
+    userChoice = number.concat(character);
+  } else if (
+    confirmNum === true &&
+    confirmLower === true &&
+    !confirmChar &&
+    !confirmUpper
+  ) {
+    userChoice = number.concat(alphaLow);
+  } else if (
+    confirmNum === true &&
+    confirmUpper === true &&
+    !confirmChar &&
+    !confirmLower
+  ) {
+    userChoice = number.concat(alphaUpper);
+  } else if (
+    confirmChar === true &&
+    confirmLower === true &&
+    !confirmNum &&
+    !confirmUpper
+  ) {
+    userChoice = character.concat(alphaLow);
+  } else if (
+    confirmChar === true &&
+    confirmUpper === true &&
+    !confirmNum &&
+    !confirmLower
+  ) {
+    userChoice = character.concat(alphaUpper);
+  } else if (
+    confirmLower === true &&
+    confirmUpper === true &&
+    !confirmNum &&
+    !confirmChar
+  ) {
+    userChoice = alphaLow.concat(alphaUpper);
+    //single criteria choosen
+  } else if (
+    confirmNum === true &&
+    !confirmChar &&
+    !confirmLower &&
+    !confirmUpper
+  ) {
+    userChoice === number;
+  } else if (
+    confirmChar === true &&
+    !confirmNum &&
+    !confirmLower &&
+    !confirmUpper
+  ) {
+    userChoice === character;
+  } else if (
+    confirmLower === true &&
+    !confirmNum &&
+    !confirmChar &&
+    !confirmUpper
+  ) {
+    userChoice = alphaLow;
   } else {
-    choices = alpha2;
+    userChoice = alphaUpper;
   }
 }
