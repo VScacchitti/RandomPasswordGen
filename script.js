@@ -1,10 +1,11 @@
+// Variable Declaration
 var confirmLength;
 var confirmNum;
 var confirmChar;
 var confirmLower;
 var confirmUpper;
-
-var character = [
+//
+character = [
   "!",
   "#",
   "$",
@@ -21,14 +22,14 @@ var character = [
   "/",
   ":",
   ";",
-  " < ",
+  "<",
   "=",
-  " > ",
-  " ? ",
+  ">",
+  "?",
   "@",
   "[",
   "]",
-  " ^ ",
+  "^",
   "_",
   "`",
   "{",
@@ -37,9 +38,9 @@ var character = [
   "~",
 ];
 // Numeric characters
-var number = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+number = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 // alphaLowbetical characters
-var alphaLow = [
+alphaLow = [
   "a",
   "b",
   "c",
@@ -68,7 +69,7 @@ var alphaLow = [
   "z",
 ];
 
-var alphaUpper = [
+alphaUpper = [
   "A",
   "B",
   "C",
@@ -102,7 +103,7 @@ var userChoice;
 var generateBtn = document.querySelector("#generate");
 //On Click button function
 generateBtn.addEventListener("click", function () {
-  passsword = generatePassword();
+  newPass = generatePassword();
   document.getElementById("#passoword").placeholder = passsword;
 });
 // generates random password using arrays
@@ -110,126 +111,56 @@ function generatePassword() {
   confirmLength = prompt(
     "How many characters would you like your password to be? Please choose between 8-128."
   );
+  userChoice = alert(
+    `You have choosen ${confirmLength} charaters for your password`
+  );
   // while loop to conifrm length with-in given parameters
-  while (confirmLength <= 7 || confirmLength >= 129) {
+  if (!confirmLength) {
     alert(
       "Password length must be between 8 and 128 characters. Please try again"
     );
-    confirmLength = prompt(
-      "How many characcters would you like your password to be? Please choose between 8-128"
-    );
+  } else if (confirmLength < 8 || confirmLength > 128) {
+    alert("You must choose between 8-128 characters");
+  } else {
+    confirmNum = confirm("Will this passsword contain numeric characters?");
+    confirmChar = confirm("Will this password contain special characters?");
+    confirmLower = confirm("Will this password contain lowercase letters?");
+    confirmUpper = confirm("WIll this password contain uppercase letters?");
   }
 
-  alert(`You have choosen ${confirmLength} charaters for your password`);
-
-  confirmNum = confirm("Will this passsword contain numeric characters?");
-  confirmChar = confirm("Will this password contain special characters?");
-  confirmLower = confirm("Will this password contain lowercase letters?");
-  confirmUpper = confirm("WIll this password contain uppercase letters?");
-
   if (!confirmNum && !confirmChar && !confirmLower && !confirmUpper) {
-    alert(
+    userChoice = alert(
       "You must choose atleast one criteria to continue. Please try again."
     );
-    //all 4 criteria are choosen
-  } else if (
-    confirmNum === true &&
-    confirmChar === true &&
-    confirmLower === true &&
-    confirmUpper === true
-  ) {
+  } else if (confirmNum && confirmChar && confirmLower && confirmUpper) {
     userChoice = number.concat(character, alphaLow, alphaUpper);
-    //3 criteria are choosen
-  } else if (
-    confirmNum == true &&
-    confirmChar === true &&
-    confirmLower === true &&
-    !confirmUpper
-  ) {
+  } else if (confirmNum && confirmChar && confirmLower) {
     userChoice = number.concat(character, alphaLow);
-  } else if (
-    (confirmNum =
-      true && confirmChar === true && confirmUpper === true && !confirmLower)
-  ) {
+  } else if (confirmNum && confirmChar && confirmUpper) {
     userChoice = number.concat(character, alphaUpper);
-  } else if (
-    confirmNum === true &&
-    confirmLower === true &&
-    confirmUpper === true &&
-    !confirmChar
-  ) {
+  } else if (confirmNum && confirmLower && confirmUpper) {
     userChoice = number.concat(alphaLow, alphaUpper);
-  } else if (
-    confirmChar === true &&
-    confirmLower === true &&
-    confirmUpper === true &&
-    !confirmNum
-  ) {
+  } else if (confirmChar && confirmLower && confirmUpper) {
     userChoice = character.concat(alphaLow, alphaUpper);
     // 2 criteria are choosen
-  } else if (
-    confirmNum === true &&
-    confirmChar === true &&
-    !confirmLower &&
-    !confirmUpper
-  ) {
+  } else if (confirmNum && confirmChar) {
     userChoice = number.concat(character);
-  } else if (
-    confirmNum === true &&
-    confirmLower === true &&
-    !confirmChar &&
-    !confirmUpper
-  ) {
+  } else if (confirmNum && confirmLower) {
     userChoice = number.concat(alphaLow);
-  } else if (
-    confirmNum === true &&
-    confirmUpper === true &&
-    !confirmChar &&
-    !confirmLower
-  ) {
+  } else if (confirmNum && confirmUpper) {
     userChoice = number.concat(alphaUpper);
-  } else if (
-    confirmChar === true &&
-    confirmLower === true &&
-    !confirmNum &&
-    !confirmUpper
-  ) {
+  } else if (confirmChar && confirmLower) {
     userChoice = character.concat(alphaLow);
-  } else if (
-    confirmChar === true &&
-    confirmUpper === true &&
-    !confirmNum &&
-    !confirmLower
-  ) {
+  } else if (confirmChar && confirmUpper) {
     userChoice = character.concat(alphaUpper);
-  } else if (
-    confirmLower === true &&
-    confirmUpper === true &&
-    !confirmNum &&
-    !confirmChar
-  ) {
+  } else if (confirmLower && confirmUpper) {
     userChoice = alphaLow.concat(alphaUpper);
     //single criteria choosen
-  } else if (
-    confirmNum === true &&
-    !confirmChar &&
-    !confirmLower &&
-    !confirmUpper
-  ) {
-    userChoice === number;
-  } else if (
-    confirmChar === true &&
-    !confirmNum &&
-    !confirmLower &&
-    !confirmUpper
-  ) {
-    userChoice === character;
-  } else if (
-    confirmLower === true &&
-    !confirmNum &&
-    !confirmChar &&
-    !confirmUpper
-  ) {
+  } else if (confirmNum) {
+    userChoice = number;
+  } else if (confirmChar) {
+    userChoice = character;
+  } else if (confirmLower) {
     userChoice = alphaLow;
   } else {
     userChoice = alphaUpper;
@@ -237,18 +168,18 @@ function generatePassword() {
   // empty array for randomly selected password characters
   var password = [];
 
-  // for loop
-  for (i = 0; i < confirmLength; i++) {
-    var pickUserChoice =
-      userChoice[Math.floor(Math.random() * userChoice.length)];
-    passsword.push(pickUserChoice);
+  // for loop to get random characters
+  for (var i = 0; i < confirmLength; i++) {
+    var userPicks = userChoice[Math.floor(Math.random() * userChoice.length)];
+    password.push(userPicks);
   }
-
-  var randompass = passsword.join("");
-  UserInput(randompass);
-  return randompass;
+  // Shoutout to Eric for posting the array methods from W3!
+  var newPass = password.join("");
+  writePassword(newPass);
+  return newPass;
 }
-
-function UserInput(randompass) {
-  document.getElementById("#password").textContent = randompass;
+// This puts the password value into the textbox
+// Changed function input to use textcontent
+function writePassword(newPass) {
+  document.getElementById("password").textContent = newPass;
 }
